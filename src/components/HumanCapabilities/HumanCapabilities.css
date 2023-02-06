@@ -1,0 +1,21 @@
+.recharts-default-legend {
+  text-align: right !important;
+}
+.radialBarLabels {
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
+  font-size: 11px;
+  left: 87px;
+}
+.chart-wrapper {
+  direction: ltr;
+}
+.languages-chart {
+  position: relative;
+  margin-top: 21px;
+}
+.languages-chart .recharts-default-legend {
+  display: flex;
+  flex-direction: column-reverse;
+}

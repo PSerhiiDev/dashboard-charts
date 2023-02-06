@@ -1,0 +1,27 @@
+.radialWrapper {
+  position: relative;
+}
+
+.radialWrapper .div40 {
+  position: absolute;
+  bottom: 40%;
+  left: 45%;
+  color: #C3A355
+  
+}
+
+.radialWrapper .div60 {
+  position: absolute;
+  top: 14%;
+  left: 18%;
+  color: #39836B
+}
+
+.radialWrapper .apexcharts-legend.apexcharts-align-center.apx-legend-position-right {
+  position: absolute;
+  left: 172px!important;
+  top: 7px!important;
+  right: auto!important;
+
+}
+

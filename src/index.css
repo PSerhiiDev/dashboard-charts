@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "neo-sans";
+  src: url(./fonts/alfont_com_AlFont_com_NeoSansArabic.ttf);
+}

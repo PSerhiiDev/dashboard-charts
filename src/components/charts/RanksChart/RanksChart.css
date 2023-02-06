@@ -1,0 +1,74 @@
+svg {
+  overflow: visible !important;
+}
+
+.apexcharts-yaxis {
+  transform: translateX(0px);
+}
+
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1.1;
+  color: #53AA8A;
+  display: grid;
+  grid-template-columns: 8px auto;
+  gap: 0.5em;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control--1 {
+  margin-left: 4px;
+}
+
+.form-control--2 {
+  display: flex;
+  align-items: center;
+  color: #D03B3B;
+} 
+
+.form-control--2::before {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 11px;
+  background: #D03B3B;
+  border-radius: 2px;
+  transform: translateY(1px);
+}
+
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 9px;
+  height: 9px;
+  border: 2px solid #53AA8A;
+  border-radius: 50%;
+  box-sizing: border-box;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 4px 4px currentColor;
+  background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
