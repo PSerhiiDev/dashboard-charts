@@ -54,14 +54,14 @@ export const AppRoutes: FC = () => {
             </Suspense>
           }
         /> */}
-        {/* <Route
+        <Route
           path="/human-capabilities"
           element={
             <Suspense fallback={<Loader />}>
               <HumanCapabilities />
             </Suspense>
           }
-        /> */}
+        />
         
         {/* <Route
           path="/List"

@@ -46,7 +46,7 @@ function Navbar() {
     // },
     {
       id: 1,
-      name: "HumanPower",
+      name: "Human power",
       link: "/",
     },
     {
