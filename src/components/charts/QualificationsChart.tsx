@@ -10,9 +10,6 @@ import {
 
 import Json from "../../AllData-json.json";
 import NoDataMessage from "./NoDataMessage";
-// import { selectors } from "../../../store/filters/selectors";
-// import { useSelector } from "../../../store/hooks";
-// import NoDataMessage from "../NoDataMessage";
 
 type Qalification = {
   Degree_Id: number;
@@ -20,15 +17,6 @@ type Qalification = {
   Universities_Id: number;
   Specializations_Id: number;
   EmployeeID: number;
-}
-
-type QalificationFoo = {
-  Degree_Id: number;
-}
-
-
-type Dictionary = {
-  [key: string]: string | number;
 }
 
 type ChartPercentageProps = {
@@ -44,41 +32,13 @@ type ChartNameProps = {
   fill: string
 }
 
-const getKeyValue = <U extends keyof T, T extends object>(key: U) => (obj: T) =>
-  obj[key];
-
 const LKP_Degree = Json.LKP_Degree;
 const qualifications = Json.Qualifications
 
 const QualificationsChart = () => {
   const colorsData = ["#53aa8a", "#c3a355", "#4a8e55", "#000", "#29624f"];
-  // const filteredQalifications = useSelector(
-  //   selectors.getFilteredTableData("Qualifications")
-  // );
-  // console.log(qualifications);
-  // const degreeCountFoo = qualifications.reduce(
-  //   (acc, rec: Qalification) => {
-  //     console.log(acc)
-  //     console.log(rec);
-  //     return typeof (acc as keyof QalificationFoo)[rec.Degree_Id] !== "undefined"
-  //       ? { ...acc, [rec.Degree_Id]: (acc  as keyof QalificationFoo)[rec.Degree_Id] + 1 }
-  //       : { ...acc, [rec.Degree_Id]: 1 };
-  //   },
-  //   {}
-  // );
-  // console.log(degreeCountFoo);
 
   const getQalificationsData = () => {
-    // const degreeCount = qualifications.reduce(
-    //   (acc, rec: Qalification) => {
-    //     console.log();
-
-    //     return typeof (acc as keyof QalificationFoo)[rec.Degree_Id] !== "undefined"
-    //       ? { ...acc, [rec.Degree_Id]: (acc as keyof QalificationFoo)[rec.Degree_Id] + 1 }
-    //       : { ...acc, [rec.Degree_Id]: 1 };
-    //   },
-    //   {}
-    // );
     const degreeCount = qualifications.reduce<Record<string, number>>(
       (acc, rec: Qalification) => {
         return acc[rec.Degree_Id] !== undefined
@@ -87,14 +47,13 @@ const QualificationsChart = () => {
       },
       {}
     );
-    console.log('degreeCount', degreeCount);
 
     const result = [];
 
     for (let key in degreeCount) {
       result.push({
         name: LKP_Degree.find((item) => item.Id === +key)?.Name,
-        value: +degreeCount[key] 
+        value: +degreeCount[key]
       });
     }
 
@@ -147,7 +106,6 @@ const QualificationsChart = () => {
           axisLine={false}
           tickLine={false}
           type="number"
-         // reversed
           tick={{
             fontSize: 11,
             fill: "#53aa8a",
@@ -166,10 +124,9 @@ const QualificationsChart = () => {
           radius={20}
           barSize={7}
           background={{ radius: 20 }}
-          // label={customPercentageLabel}
         >
           <LabelList dataKey="name" content={customNameLabel as any} />
-          <LabelList content={customPercentageLabel as any}  />
+          <LabelList content={customPercentageLabel as any} />
           {colorsData.map((item, idx) => (
             <Cell key={idx} fill={item} />
           ))}

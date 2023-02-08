@@ -1,51 +1,32 @@
-import React from 'react'
-import NoDataMessage from '../NoDataMessage';
+import NoDataMessage from "../NoDataMessage";
 import { Legend, Pie, PieChart, Sector, ResponsiveContainer } from "recharts";
 import Json from "../../../AllData-json.json";
-import "./RetirementChart.css"
+import { DataFromJSON } from "../../../types";
 
-type DataFromJSON = {
-  EmployeeID: number;
-  Name: string;
-  Gender_Id: number;
-  Gender: string;
-  Nationality_Id: number;
-  NationalityName: string;
-  RankType_Id: number;
-  RankTitle_Id: number;
-  RanktitleName: string;
-  MaritalStatus_Id: number;
-  MaritalStatus: string;
-  BirthDate: string;
-  Sector_Id: number;
-  SectoreName: string;
-  Administration_Id: number;
-  AdministrationName: string;
-  Cities_Id: number;
-  CityName: string;
-  JoiningDate: string;
-  IsHighRank: boolean;
-}
+type RetirementProps = {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  startAngle: number;
+  endAngle: number;
+  fill: string;
+  value: number;
+};
 
-// const utc = parseInt(new Date().toJSON().slice(0, 10));
-// const DataArr = Json.Employee;
-
-
-// "المتبقي من التقاعد": [
-//   { "id": "1 - 5 سنة", "value": "1 - 5 سنة" },
-//   { "id": "10 - 14 سنة", "value": "10 - 14 سنة" },
-//   { "id": "15 - 20 سنة", "value": "15 - 20 سنة" }
-// ]
-
-type TObject = {
-  [x: string]: string
-}
-
-
-const renderActiveShape = (props: any) => {
+const renderActiveShape = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  startAngle,
+  endAngle,
+  fill,
+  value,
+}: RetirementProps) => {
   const RADIAN = Math.PI / 180;
-  const { cx, cy, midAngle, innerRadius, outerRadius,
-    startAngle, endAngle, fill, value } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
   const sx = cx + (outerRadius + 0) * cos;
@@ -69,7 +50,11 @@ const renderActiveShape = (props: any) => {
             fill={fill}
             cornerRadius={30}
           />
-          <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+          <path
+            d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+            stroke={fill}
+            fill="none"
+          />
           <text
             x={ex + (cos >= 0 ? 1 : -1) + 5}
             y={ey - 5}
@@ -90,13 +75,6 @@ const renderActiveShape = (props: any) => {
 const arrData = Json.Employee;
 
 const RetirementChart = () => {
-
-  // const filteredEmployee = useSelector(
-  //   selectors.getFilteredTableData("Employee")
-  // );
-
-
-
   const data = [
     { id: "15 - 20 سنة", name: "20-15", value: 0, fill: "#39836b" },
     { id: "10 - 14 سنة", name: "14-10", value: 0, fill: "#c3a355" },
@@ -104,9 +82,10 @@ const RetirementChart = () => {
   ];
 
   const utc = parseInt(new Date().toJSON().slice(0, 10));
-  const dates = arrData.map((item: any) => item.BirthDate.replace(/(\d\d)\/(\d\d)\/(\d{4})/, "$3/$1/$2"));
-  
-  dates.map((item: any) => {
+  const dates = arrData.map((item: DataFromJSON) =>
+    item.BirthDate.replace(/(\d\d)\/(\d\d)\/(\d{4})/, "$3/$1/$2")
+  );
+  dates.map((item: string) => {
     const diffTime = Math.abs(utc - parseInt(item));
     const dateDiff = 60 - diffTime;
     if (dateDiff <= 20 && dateDiff >= 15) {
@@ -122,12 +101,12 @@ const RetirementChart = () => {
 
   const checkLowValues = data.map((item) => {
     if (item.value > 0 && item.value < 5) {
-      return false
+      return false;
     }
-    return true
-  })
+    return true;
+  });
 
-  const checkEmptyValue = data.every(item => item.value === 0);
+  const checkEmptyValue = data.every((item) => item.value === 0);
   const activeIndex = data.map((_, index) => index);
 
   return !checkEmptyValue ? (
@@ -158,6 +137,6 @@ const RetirementChart = () => {
   ) : (
     <NoDataMessage />
   );
-}
+};
 
-export default RetirementChart
+export default RetirementChart;

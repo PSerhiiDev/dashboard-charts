@@ -1,9 +1,6 @@
 import { Legend, RadialBar, RadialBarChart } from "recharts";
 import Json from "../../AllData-json.json";
-// import { selectors } from "../../../store/filters/selectors";
-// import { useSelector } from "../../../store/hooks";
 import NoDataMessage from "./NoDataMessage";
-
 interface language {
   Languages_Id: number;
 }
@@ -13,9 +10,6 @@ const Languages = Json.Languages;
 
 const LanguagesChart = () => {
   const fills = ["#C3A355", "#29624F", "black", "#53AA8A", "#808080"];
-  // const filteredLanguages = useSelector(
-  //   selectors.getFilteredTableData("Languages")
-  // );
   let languagesLenght = 0;
 
   const getLanguagesData = () => {

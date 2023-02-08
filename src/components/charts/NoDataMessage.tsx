@@ -7,7 +7,7 @@ const NoDataMessage = ({ styles }: Props) => {
     <h2
       className={`text-center text-[12px] text-[#C4C4C4] w-full mt-[113px] ${styles}`}
     >
-      لاتوجد نتائج بحث حتى الآن
+      There are no search results yet
     </h2>
   );
 };

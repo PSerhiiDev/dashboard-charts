@@ -1,0 +1,12 @@
+
+.talents-wrapper .recharts-cartesian-grid-horizontal line:nth-of-type(6) {
+  display: none;
+}
+
+.talents-wrapper .recharts-rectangle.recharts-bar-background-rectangle {
+  clip-path: inset(0% -6% 0% -6% round 15px);
+}
+
+.talents-wrapper .recharts-layer .recharts-bar-rectangle {
+  clip-path: inset(-2% 0% 0% 0% round 15px);
+}

@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from "react";
 import "./RanksChart.css";
-import useAxesValues from './useAxexValues';
+import useAxesValues from "./useAxexValues";
 import ReactApexChart from "react-apexcharts";
+
+type Series = {
+  data: number[];
+  name: string;
+};
 
 const RanksChart = () => {
   const [labels2Data, labels2] = useAxesValues(1);
@@ -10,13 +15,10 @@ const RanksChart = () => {
 
   const [checked, setChecked] = useState(true);
 
-  //console.log(labels3Data); // [0, 3, 4, 1, 8, 3]
-
-
   const series1 = [
     {
-      name: "Civil", // civil
-      data: (labels1Data as any).every((item: number) => item === 0)
+      name: "Civil",
+      data: (labels1Data as number[]).every((item: number) => item === 0)
         ? []
         : labels1Data,
     },
@@ -24,14 +26,14 @@ const RanksChart = () => {
 
   const series2 = [
     {
-      name: "Military", //military
-      data: (labels2Data as any).every((item: number) => item === 0)
+      name: "Military",
+      data: (labels2Data as number[]).every((item: number) => item === 0)
         ? []
         : labels2Data,
     },
     {
-      name: "ركن", // red graph
-      data: (labels3Data as any).every((item: number) => item === 0)
+      name: "high rank", // red chart
+      data: (labels3Data as number[]).every((item: number) => item === 0)
         ? []
         : labels3Data,
     },
@@ -45,11 +47,11 @@ const RanksChart = () => {
 
   if (checked) {
     m = 10;
-    series = series2 as any;
+    series = series2;
     labels = labels2;
   }
 
-  //make a light green color for the first n columns and dark green for the rest
+  // light green color for the first n columns and dark green for the rest
   const makeColors = ({ dataPointIndex }: { dataPointIndex: number }) => {
     if (dataPointIndex < m) {
       return "#53AA8A";
@@ -58,7 +60,7 @@ const RanksChart = () => {
     }
   };
 
-  //make a light green color for the first n x-labels and dark green for the rest
+  // light green color for the first n x-labels and dark green for the rest
   const makeLabelColors = () => {
     return Array(m)
       .fill("#53AA8A")
@@ -85,7 +87,14 @@ const RanksChart = () => {
     grid: {
       show: true,
       borderColor: "rgba(80,80,80, 0.2)",
-      position: "back",
+      padding: {
+        top: 0,
+        bottom: 0,
+      },
+      margin: {
+        top: 0,
+        bottom: 0,
+      },
     },
     dataLabels: {
       enabled: false,
@@ -111,34 +120,22 @@ const RanksChart = () => {
       },
       labels: {
         rotate: 0,
+        offsetY: -5,
         style: {
           colors: makeLabelColors(),
-          fontSize: 11,
+          fontSize: 9,
           fontFamily: "Neo Sans Arabic",
           letterSpacing: "0.01px",
           textAlign: "center",
-          lineHeight: 50,
         },
-        
       },
     },
     yaxis: {
       showDuplicates: false,
       min: 0, // start values point
-      // min: (min) => {
-        //   console.log(`Min value: ${min}`);
-        //   return min;
-        // },
-        max: (max: any) => {
-          // console.log(`Max value: ${max}`);
-          return max;
-        },
-        tickAmount: 4,
+      tickAmount: 4,
       labels: {
-        //format for heigh values
-        //formatter: (item: any) => Math.ceil(item / 1000) + "k",
-      //  formatter: (item: any) =>  Math.ceil(item),
-      // showDuplicates: false,
+        maxWidth: 15,
         style: {
           colors: ["#C3A355"],
           fontSize: "12px",
@@ -164,24 +161,10 @@ const RanksChart = () => {
     },
   };
 
-  //align single columns
-  // useEffect(() => {
-  //   if (checked) {
-  //     const columnsNode = document.querySelectorAll(
-  //       '#column-chart [rel="1"] path'
-  //     ) as NodeListOf<HTMLElement>;
-  //     const columns = [...columnsNode]
-  //       .slice(series2[1].data.length)
-  //       .forEach(
-  //         (column) => (column.style.cssText = "transform: translateX(5px)")
-  //       );
-  //   }
-  // }, [checked]);
-
   return (
     <div id="column-chart">
       <div className="flex justify-start">
-        <div className="ml-9 text-[#29624F]">Switch</div>
+        <div className="ml-12 mr-5 text-[#29624F]">Switch</div>
         <label className="form-control form-control--1">
           <input
             id="radio-1"
@@ -208,13 +191,13 @@ const RanksChart = () => {
       <div id="chart">
         <ReactApexChart
           options={options}
-          series={series as any}
+          series={series as Series[]}
           type="bar"
-          height={260}
+          height={250}
         />
       </div>
     </div>
   );
-}
+};
 
-export default RanksChart
+export default RanksChart;

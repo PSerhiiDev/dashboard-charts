@@ -23,13 +23,10 @@ type Obj = {
   global: number;
   local: number;
   total: number;
-}
+};
 
 const MajorsChart = () => {
   const { LKP_Specializations, LKP_Universities, Qualifications } = Json;
-  // const filteredQalifications = useSelector(
-  //   selectors.getFilteredTableData("Qualifications")
-  // );
 
   const calculateSpec = (
     prev: number,
@@ -50,7 +47,6 @@ const MajorsChart = () => {
   const getMajorsData = () => {
     const majors = Qualifications.reduce<Record<string, Obj>>(
       (acc, rec: qalification) => {
-
         return typeof acc[rec.Specializations_Id] !== "undefined"
           ? {
               ...acc,

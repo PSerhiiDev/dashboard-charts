@@ -9,8 +9,6 @@ import {
 } from "recharts";
 import Json from "../../AllData-json.json";
 import NoDataMessage from "./NoDataMessage";
-
-
 interface qalification {
   Administration_Id: number;
 }
@@ -19,9 +17,6 @@ const LKP_Administration = Json.LKP_Administration;
 const employee = Json.Employee
 
 const SectionsChart = () => {
-  // const filteredEmployee = useSelector(
-  //   selectors.getFilteredTableData("Employee")
-  // );
 
   const getSectionsData = () => {
     const administrationsCount = employee.reduce<Record<string, number>>(
@@ -110,7 +105,6 @@ const SectionsChart = () => {
       style={{
         justifyContent: "flex-start",
         marginTop: "30px",
-        // marginLeft: 0
       }}
     >
       <pattern
@@ -140,7 +134,7 @@ const SectionsChart = () => {
           fill: "#C3A355",
         }}
         tickMargin={0}
-        width={ 18 }
+        width={18}
       />
       <Tooltip content={customizedTooltip} />
       <Bar

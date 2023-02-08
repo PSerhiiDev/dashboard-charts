@@ -51,11 +51,11 @@ const MaritalChart = () => {
           offsetX: 1,
           radius: 2
         },
-        
+
         show: true,
         formatter: (seriesName: any, value: any) => {
-          return `${[{ name: 'married', value: 40 }, 
-                     { name: 'single', value: 60 }].map(item => {
+          return `${[{ name: 'married', value: 40 },
+          { name: 'single', value: 60 }].map(item => {
             return item.name;
           })[value.seriesIndex]}`
         }
@@ -73,7 +73,7 @@ const MaritalChart = () => {
     }
   }
 
-  const checkIfEmpty = (marriedPer  !== 0 && singlePer !== 0) ? true : false
+  const checkIfEmpty = (marriedPer !== 0 && singlePer !== 0) ? true : false
 
   return checkIfEmpty ? (
     <div className="radialWrapper">

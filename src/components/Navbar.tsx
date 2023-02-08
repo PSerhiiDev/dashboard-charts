@@ -4,20 +4,15 @@ import advancedFilter from "../assets/advanced-filter.svg";
 import { NavLink, useLocation } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import ProfileNavbar from "./ProfileNavbar";
-// import { NavLink, useLocation } from "react-router-dom";
-// import AdvancedSearch from "./AdvancedSearch";
-// import ProfileNavbar from "./ProfileNavbar";
 
 function Navbar() {
   const [searchShow, setSearchShow] = useState(false);
   const [advancedSearch, setAdvancedSearch] = useState(false);
- const pathname = useLocation();
+  const pathname = useLocation();
 
   useEffect(() => {
     resetState();
   }, [pathname]);
-
-  // const isNavbarShow = pathname.pathname !== "/sign-in";
 
   function resetState() {
     setSearchShow(false);
@@ -33,17 +28,7 @@ function Navbar() {
     paddingBottom: "4px",
   };
 
-  const onCloseAdvancedSearch = useCallback(() => {
-    setAdvancedSearch(false);
-    setSearchShow(false);
-  }, [advancedSearch]);
-
   const navList = [
-    // {
-    //   id: 1,
-    //   name: "Sectors",
-    //   link: "/Sectors",
-    // },
     {
       id: 1,
       name: "Human power",
@@ -54,11 +39,6 @@ function Navbar() {
       name: "Human capabilities",
       link: "/human-capabilities",
     },
-    // {
-    //   id: 4,
-    //   name: "القائمة",
-    //   link: "/List",
-    // }, //
   ];
 
   return (
@@ -72,7 +52,6 @@ function Navbar() {
                 key={item.id}
                 className={`text-[#39836B] border-r px-4 pt-7 hover:bg-[#ECF3ED] cursor-pointer
                  ${pathname.pathname === item.link ? "bg-[#ECF3ED]" : ""} 
-             
               `}
               >
                 <NavLink
@@ -105,9 +84,6 @@ function Navbar() {
                   className="cursor-pointer ml-auto"
                   onClick={() => setAdvancedSearch(!advancedSearch)}
                 />
-                {/* {advancedSearch && (
-                  <AdvancedSearch onDecline={onCloseAdvancedSearch} />
-                )} */}
               </div>
             )}
             <li className="text-[#353334] border-r px-4 pt-6 text-[10px]">

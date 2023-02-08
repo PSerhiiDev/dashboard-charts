@@ -3,17 +3,9 @@ import LanguagesChart from "../charts/LanguagesChart";
 import MajorsChart from "../charts/MajorsChart";
 import QualificationsChart from "../charts/QualificationsChart";
 import SectionsChart from "../charts/SectionsChart";
+import TalentsChart from "../charts/TalentsChart";
+import UniversitiesChart from "../charts/UniversitiesChart";
 import PageTitle from "../PageTitle";
-// import LanguagesChart from "../charts/LanguagesChart";
-// import MajorsChart from "../charts/MajorsChart";
-// import QualificationsChart from "../charts/QualificationsChart";
-// import SectionsChart from "../charts/SectionsChart";
-// import TalentsChart from "../charts/TalentsChart/TalentsChart";
-// import UniversitiesChart from "../charts/UniversitiesChart";
-// import SearchOptionsBar from "../SearchOptionsBar";
-// import PageTitle from "../PageTitle";
-// import PageContainer from "../PageContainer";
-
 import "./HumanCapabilities.css";
 
 function HumanCapabilities() {
@@ -21,7 +13,6 @@ function HumanCapabilities() {
     <div className="max-w-7xl mx-auto">
       <div className="flex align-items gap-4">
         <PageTitle title="Human capabilities" />
-        {/* <SearchOptionsBar itemsCount={5} /> */}
       </div>
       <div className="mt-[40px] flex gap-[30px] h-[320px] text-[#39836B]">
         <div className="rounded-md bg-white py-[17px] px-[20px] w-[258px]">
@@ -46,11 +37,11 @@ function HumanCapabilities() {
         </div>
         <div className="rounded-md bg-white py-[17px] px-[20px] w-[258px]">
           <h1>Universities</h1>
-          {/* <UniversitiesChart /> */}
+          <UniversitiesChart />
         </div>
         <div className="rounded-md bg-white py-[17px] pr-[10px] w-[258px]">
-          <h1>Talents</h1>
-          {/* <TalentsChart /> */}
+          <h1 className="pl-1.5">Talents</h1>
+          <TalentsChart />
         </div>
       </div>
     </div>
