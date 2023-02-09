@@ -42,15 +42,17 @@ function Navbar() {
   ];
 
   return (
-    <div className="bg-white drop-shadow-[0_2px_4px_rgba(57,131,107,0.25)] border-b sticky top-0 z-50">
-      <nav className=" max-w-full w-[1122px] mx-auto relative">
-        <div className="flex h-20 items-center">
-          <img src={logo} alt="logo" className="mr-auto pr-4" />
-          <ul className="h-full flex text-center">
+    <div className="bg-white drop-shadow-[0_2px_4px_rgba(57,131,107,0.25)] border-b 
+    sticky top-0 z-50 sm:static">
+      <nav className=" max-w-full w-[1122px] mx-auto relative lg:w-auto lg:px-3">
+        <div className="flex h-20 items-center sm:flex-col sm:h-full sm:py-3 sm:items-center">
+          <img src={logo} alt="logo" className="mr-auto pr-4 sm:mx-auto sm:mb-2" />
+          <ul className="h-full flex text-center sm:flex-wrap sm:justify-center sm:w-[320px]">
             {navList.map((item) => (
               <li
                 key={item.id}
-                className={`text-[#39836B] border-r px-4 pt-7 hover:bg-[#ECF3ED] cursor-pointer
+                className={`text-[#39836B] border-r px-4 pt-7 hover:bg-[#ECF3ED] 
+                cursor-pointer sm:border-none sm:bg-transparent sm:hover:bg-transparent
                  ${pathname.pathname === item.link ? "bg-[#ECF3ED]" : ""} 
               `}
               >
@@ -65,7 +67,8 @@ function Navbar() {
                 </NavLink>
               </li>
             ))}
-            <li className="text-[#353334] border-r px-10 pt-7 text-[10px] flex flex-col items-center cursor-pointer">
+            <li className="text-[#353334] border-r px-10 pt-7 text-[10px] flex 
+            flex-col items-center cursor-pointer sm:border-none">
               <button onClick={() => setSearchShow(!searchShow)}>
                 <BsSearch className="mx-auto mb-1 text-lg text-[#C3A355]" />
                 Search
@@ -86,7 +89,7 @@ function Navbar() {
                 />
               </div>
             )}
-            <li className="text-[#353334] border-r px-4 pt-6 text-[10px]">
+            <li className="text-[#353334] border-r px-4 pt-6 text-[10px] sm:border-none">
               <ProfileNavbar />
             </li>
           </ul>

@@ -11,6 +11,7 @@ import {
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 import Json from "../../AllData-json.json";
+import { useScreenDimension } from "../hooks/useScreenDimension";
 
 echarts.use([
   TitleComponent,
@@ -22,6 +23,7 @@ echarts.use([
 ]);
 
 const AgeGroupChart = () => {
+  const windowSize = useScreenDimension();
   const arrData = Json.Employee;
   const calculate_age = (dob: number) => {
     const birthDate = new Date(dob);
@@ -30,6 +32,8 @@ const AgeGroupChart = () => {
 
     return Math.abs(age.getUTCFullYear() - 1970);
   };
+
+
 
   function ageGroupes() {
     const dates = arrData?.map((i: any) => i.BirthDate);
@@ -123,7 +127,7 @@ const AgeGroupChart = () => {
         radius: [0, 80],
         height: "73.33%",
         left: 0,
-        width: 320,
+        width: windowSize[0] < 600 ? 270 : 320,
         itemStyle: {
           borderColor: "#fff",
           borderWidth: 1,

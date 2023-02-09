@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./RanksChart.css";
 import useAxesValues from "./useAxexValues";
 import ReactApexChart from "react-apexcharts";
+import { useLocation } from "react-router-dom";
+import { useScreenDimension } from "../../hooks/useScreenDimension";
 
 type Series = {
   data: number[];
@@ -14,6 +16,8 @@ const RanksChart = () => {
   const [_, __, labels3Data] = useAxesValues(3);
 
   const [checked, setChecked] = useState(true);
+
+  const windowSize = useScreenDimension();
 
   const series1 = [
     {
@@ -69,6 +73,7 @@ const RanksChart = () => {
 
   const options: any = {
     chart: {
+     // height: '250px',
       type: "bar",
       redrawOnWindowResize: false,
       toolbar: {
@@ -119,7 +124,8 @@ const RanksChart = () => {
         show: false,
       },
       labels: {
-        rotate: 0,
+        // rotateAlways: true,
+        // rotate: -90,
         offsetY: -5,
         style: {
           colors: makeLabelColors(),
@@ -135,7 +141,7 @@ const RanksChart = () => {
       min: 0, // start values point
       tickAmount: 4,
       labels: {
-        maxWidth: 15,
+        maxWidth: windowSize[0] < 740  ? 75 : 15,
         style: {
           colors: ["#C3A355"],
           fontSize: "12px",
@@ -159,6 +165,21 @@ const RanksChart = () => {
         fontSize: "18px",
       },
     },
+    responsive: [
+      {
+        breakpoint: 740,
+        options: {
+          plotOptions: {
+            bar: {
+              horizontal: true
+            }
+          },
+          legend: {
+            position: "bottom"
+          }
+        }
+      }
+    ]
   };
 
   return (
@@ -188,12 +209,12 @@ const RanksChart = () => {
           Civil
         </label>
       </div>
-      <div id="chart">
+      <div id="chart" className="md:w-[300px]">
         <ReactApexChart
           options={options}
           series={series as Series[]}
           type="bar"
-          height={250}
+          height={windowSize[0] < 740 ? 600 : 250}
         />
       </div>
     </div>

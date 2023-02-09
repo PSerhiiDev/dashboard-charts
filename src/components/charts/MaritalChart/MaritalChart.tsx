@@ -3,10 +3,11 @@ import useLiteral from '../../hooks/useLiteral';
 import NoDataMessage from '../NoDataMessage';
 import Chart from "react-apexcharts";
 import "./MaritalChart.css";
+import { useScreenDimension } from '../../hooks/useScreenDimension';
 
 
 const MaritalChart = () => {
-
+  const windowSize = useScreenDimension();
   const [marriedPer, singlePer] = useLiteral('MaritalStatus', "married");
   const state = {
     options: {
@@ -91,7 +92,8 @@ const MaritalChart = () => {
             }
           }
         }}
-        type="radialBar" width="380" />
+        type="radialBar" 
+        width={windowSize[0] < 500 ? "300" : "380"} />
     </div>
   ) : (
     <NoDataMessage />

@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <>
-      <div className="font-neo min-h-screen bg-[#F4F4F4] flex flex-col relative" >
+      <div className="font-neo  bg-[#F4F4F4] flex flex-col relative" >
         <Navbar />
         <AppRoutes />
       </div>

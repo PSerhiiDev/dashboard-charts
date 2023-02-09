@@ -24,3 +24,9 @@
   right: auto!important;
 }
 
+@media (max-width: 500px) {
+  .radialWrapper .div40 {
+    left: 25%;
+    bottom: 37%;
+  }
+}

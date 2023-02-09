@@ -13,20 +13,21 @@ function HumanPower() {
   const checkIfEmpty = malesPer !== 0 && femalesPer !== 0 ? true : false;
 
   return (
-    <div className="relative human-power max-w-7xl m-auto">
+    <div className="relative human-power max-w-7xl m-auto md:px-3 sm:pr-0 sm:pl-1">
       <div>
-        <div className="flex align-items gap-4">
+        <div className="flex align-items">
           <PageTitle title="Human staff" />
         </div>
-        <div className="mt-[40px]  flex gap-7 h-[320px] text-[#39836B]">
-          <div className="rounded-md bg-white w-[270px] p-4">
-            <h1>Marital status</h1>
+        <div className="mt-[40px]  flex justify-center  h-[320px] text-[#39836B] 
+        gap-7  xl:gap-3 lg:flex-wrap lg:h-full lg:max-w-2xl lg:mx-auto sm:flex-col sm:items-center">
+          <div className="rounded-md bg-white w-[270px] p-4 sm:pl-0">
+            <h1 className="sm:pl-4">Marital status</h1>
             <div>
               <MaritalChart />
             </div>
           </div>
           <div className="w-[258px] flex flex-col gap-5 ">
-            <div className="rounded-md bg-white p-4 pb-16 h-screen">
+            <div className="rounded-md bg-white p-4 pb-16 h-screen lg:h-full">
               <h1>Sex</h1>
               {checkIfEmpty ? (
                 <div>
@@ -68,19 +69,20 @@ function HumanPower() {
               )}
             </div>
           </div>
-          <div className="rounded-md bg-white w-[540px] p-4">
-            <h1>Age group</h1>
+          <div className="rounded-md bg-white w-[540px] p-4 lg:h-[320px] sm:w-[340px] sm:px-0">
+            <h1 className="sm:pl-4">Age group</h1>
             <h2 className="text-black mt-3 text-end mr-3">Number</h2>
             <AgeGroupChart />
           </div>
         </div>
-        <div className="mt-7 mb-10 max-w-full mx-auto flex gap-7 h-[320px] text-[#39836B]">
-          <div className="rounded-md bg-white w-[370px] p-4">
+        <div className="mt-7 mb-10 max-w-full mx-auto flex gap-7 h-[320px] text-[#39836B]
+          xl:gap-3 lg:flex-col lg:items-center lg:h-full lg:max-w-3xl lg:mx-auto">
+          <div className="rounded-md bg-white w-[370px] p-4 lg:h-[400px] sm:w-[340px]">
             <h1>Expected Retirement</h1>
             <h2 className="mt-3 text-[#000] text-end">Number of years</h2>
             <RetirementChart />
           </div>
-          <div className="rounded-md bg-white w-[720px] py-4 px-2">
+          <div className="rounded-md bg-white w-[720px] py-4 px-2 md:w-[320px]">
             <h1>Ranks</h1>
             <RanksChart />
           </div>

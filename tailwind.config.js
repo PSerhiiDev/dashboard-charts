@@ -8,6 +8,11 @@ module.exports = {
         neo: "neo-sans",
       },
     },
+    screens: {
+      'xl': {'max': '1280px'},
+      'lg': {'max': '1150px'},
+      'md': {'max': '740px'},
+      'sm': {'max': '600px'},
+    }
   },
-  // plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
 };
