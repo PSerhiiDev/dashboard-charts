@@ -265,7 +265,7 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
           ? "The number of local university graduates"
           : "Number of graduates from international universities"}
       </h1>
-      <div className="relative flex flex-col h-[92%]">
+      <div className="relative flex flex-col h-[92%] sm:h-[100%]">
         <ScatterChart
           width={widthDefenition}
           height={510}
