@@ -8,6 +8,7 @@ import {
   Text,
 } from "recharts";
 import Json from "../../AllData-json.json";
+import { useScreenDimension } from "../hooks/useScreenDimension";
 import NoDataMessage from "./NoDataMessage";
 interface qalification {
   Administration_Id: number;
@@ -17,6 +18,7 @@ const LKP_Administration = Json.LKP_Administration;
 const employee = Json.Employee
 
 const SectionsChart = () => {
+  const screenWidth = useScreenDimension();
 
   const getSectionsData = () => {
     const administrationsCount = employee.reduce<Record<string, number>>(
@@ -73,10 +75,13 @@ const SectionsChart = () => {
         x={x}
         y={y}
         width={75}
-        textAnchor="middle"
+        // textAnchor="middle"
+        textAnchor={screenWidth[0] < 600 ? "start" : "middle"}
         verticalAnchor="start"
         fontSize={11}
         fill="#53aa8a"
+        angle={screenWidth[0] < 600 ? 75 : 0}
+
       >
         {payload.value}
       </Text>
@@ -97,11 +102,15 @@ const SectionsChart = () => {
 
   return getSectionsData().length ? (
     <BarChart
-      width={445}
-      height={225}
+      // width={445}
+      // height={225}
+      width={screenWidth[0] < 600 ? 330 : 445} 
+      height={screenWidth[0] < 600 ? 250 : 225}
+
       data={getSectionsData()}
       barSize={20}
       barCategoryGap={15}
+      // layout="vertical"
       style={{
         justifyContent: "flex-start",
         marginTop: "30px",
@@ -125,6 +134,8 @@ const SectionsChart = () => {
         tickLine={false}
         tick={<CustomizedAxisTick />}
         interval={0}
+        height={screenWidth[0] < 600 ? 70 : 35}
+
       />
       <YAxis
         axisLine={false}

@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import Json from "../../../AllData-json.json";
 import { ReactComponent as CloseIcon } from "../../../assets/close.svg";
+import { useScreenDimension } from "../../hooks/useScreenDimension";
 import "./styles.css";
 
 interface Props {
@@ -43,6 +44,7 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
   const { LKP_Degree, LKP_Universities, Qualifications } = Json;
   const [results, setResults] = useState<ResultItem[]>();
   const [employeeCount, setEmployeeCount] = useState<EmployeeCount>();
+
   const degreeForShow = [
     "bachelor",
     "master",
@@ -50,6 +52,31 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
     "diploma",
     "secondary",
   ];
+
+  const screenWidth = useScreenDimension();
+  const [widthDefenition, setWidthDefenition] = useState(1200)
+
+  // const widthDefenition = () => {
+  //   if(screenWidth[0] < 1280) {
+  //     return 600
+  //   } else if (screenWidth[0] < 650) {
+  //     return 350
+  //   } else {
+  //     return 1200
+
+  //   }
+  // }
+
+
+
+  useEffect(() => {
+       if(screenWidth[0] < 1280) {
+        setWidthDefenition(600)
+       }
+    if (screenWidth[0] < 650) {
+      setWidthDefenition(350)
+    }
+  }, [screenWidth]);
 
   useEffect(() => {
     getUniversitiesData();
@@ -66,7 +93,7 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
   const getUniversitiesData = () => {
     const universities = Qualifications.reduce<Record<string, Obj>>(
       (acc, rec: qalification) => {
-        console.log(acc[rec.Universities_Id]);
+        // console.log(acc[rec.Universities_Id]);
         return {
           ...acc,
           [rec.Universities_Id]: {
@@ -101,7 +128,7 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
     universitiesArr.forEach((univer) =>
       Object.keys(univer.degree).map((key) => {
         const degreeName = LKP_Degree.find((item) => item.Id === +key)?.Name;
-        console.log(degreeName);
+        // console.log(degreeName);
         if (degreeForShow.includes(degreeName!))
           results.push({
             univer: univer.name,
@@ -192,7 +219,6 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
 
   const customizedXAxisTick = (props: any) => {
     const { x, y, payload } = props;
-    console.log(x, y, payload);
     return (
       <Text
         x={x}
@@ -225,21 +251,23 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
   };
 
   return (
-    <div className="w-[1236px] h-[625px] bg-[#FFFFFF] rounded-[10px] shadow-[0_3px_6px_#B6CBBA] p-[18px] universities-rank">
+    <div className="w-[1236px] h-[625px] bg-[#FFFFFF] rounded-[10px] 
+    shadow-[0_3px_6px_#B6CBBA] p-[18px] universities-rank
+    xl:w-full sm:py-[18px] sm:pl-[10px] sm:pr-0 sm:h-[650px]">
       <button
         className="w-[22px] h-[22px] flex items-center justify-center rounded-full border-[2px] border-[#39836b]"
         onClick={onClose}
       >
         <CloseIcon />
       </button>
-      <h1 className="text-center text-[20px]">
+      <h1 className="text-center text-[20px] sm:text-[15px] sm:mt-[15px]">
         {type === "local"
           ? "The number of local university graduates"
           : "Number of graduates from international universities"}
       </h1>
       <div className="relative flex flex-col h-[92%]">
         <ScatterChart
-          width={1200}
+          width={widthDefenition}
           height={510}
           margin={{ top: 10, left: 20, bottom: 30, right: 15 }}
         >
@@ -271,10 +299,10 @@ const UniversitiesRank = ({ onClose, type }: Props) => {
           <Tooltip content={customizedTooltip} />
           <Scatter data={results} shape={customizedShape} />
         </ScatterChart>
-        <h1 className="absolute left-0 top-[-30px] text-[20px]">
+        <h1 className="absolute left-0 top-[-30px] text-[20px] sm:top-[-63px]">
           Qualification
         </h1>
-        <h1 className="text-center text-[#1E4D58] text-[20px] mt-auto">
+        <h1 className="text-center text-[#1E4D58] text-[20px] mt-auto sm:mt-0">
           Ranking of universities globally
         </h1>
       </div>

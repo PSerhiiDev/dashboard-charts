@@ -9,6 +9,7 @@ import {
   Text,
 } from "recharts";
 import Json from "../../AllData-json.json";
+import { useScreenDimension } from "../hooks/useScreenDimension";
 import NoDataMessage from "./NoDataMessage";
 
 interface qalification {
@@ -27,6 +28,7 @@ type Obj = {
 
 const MajorsChart = () => {
   const { LKP_Specializations, LKP_Universities, Qualifications } = Json;
+  const screenWidth = useScreenDimension();
 
   const calculateSpec = (
     prev: number,
@@ -97,11 +99,12 @@ const MajorsChart = () => {
       <Text
         x={x}
         y={y}
-        width={75}
-        textAnchor="middle"
+        width={55}
+        textAnchor={screenWidth[0] < 600 ? "start" : "middle"}
         verticalAnchor="start"
         fontSize={11}
         fill="#53aa8a"
+        angle={screenWidth[0] < 600 ? 75 : 0}
       >
         {payload.value}
       </Text>
@@ -145,8 +148,8 @@ const MajorsChart = () => {
   return (
     <div className="relative">
       <BarChart
-        width={515}
-        height={250}
+        width={screenWidth[0] < 600 ? 315 : 515} //515
+        height={screenWidth[0] < 600 ? 290 : 250} //250
         data={getMajorsData()}
         className="mt-[23px]"
       >
@@ -159,6 +162,7 @@ const MajorsChart = () => {
               tickLine={false}
               tick={<CustomizedAxisTick />}
               interval={0}
+              height={screenWidth[0] < 600 ? 70 : 35}
             />
             <YAxis
               axisLine={false}
